@@ -4,6 +4,7 @@ from Game.fbackground import Background
 from fcharacter import Character
 from fdisplay import Display
 from fitem_controller import Item_control
+import Interaction_controller
 
 
 def main():
@@ -60,18 +61,12 @@ def main():
             pos = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
             if click[0] == 1 and mouse:
-                if display.get_icon() == 1 and time_count.get_logs() > 0:
-                    item_methods.create_log_with_pos(pos)
-                    time_count.remove_item("Log")
-                if display.get_icon() == 2 and time_count.get_matches() > 0:
-                    item_methods.check_for_log(pos)
-                    time_count.remove_item("match")
-                if display.get_icon() == 0:
-                    item_methods.lift_item(time_count, pos)
+                Interaction_controller.clicked(display.get_icon(), time_count, item_methods, pos)
                 mouse = 0
                 display.update_icon(pos)
             if event.type == CLOCKTICKFLAME:
                 update_game_overlay(time_count, background, display, object_list, fire_list, item_methods)
+                delete_items(object_list, fire_list)
                 pygame.display.flip()
             if event.type == pygame.MOUSEBUTTONUP:
                 mouse = 1
@@ -81,6 +76,7 @@ def main():
 
 def update_game_overlay(time_count, background, display, object_list, fire_list, item_methods):
     time_count.update_time()
+    item_methods.update_flames_time()
     background.update(fire_list)
     time_count.update_overlay()
     display.update(item_methods.seen_items())
@@ -94,10 +90,25 @@ def update_character_speed(character, x, y):
 
 def game_start(window, object_list, images, item_methods):
     lumberjack_key = [images[0].get(key) for key in ['Lumberjack0', 'Lumberjack1']]
-    object_list.append(Character(window, 300, 300, 0, 0, [0, 0, 0, 0], "character", [lumberjack_key, images[1][0]]))
+    object_list.append(Character(window, 300, 300, 0, 0, [0, 0, 0, 0], "character", [lumberjack_key, images[1][0]], False))
 
     item_methods.create_log(1)
     item_methods.create_fire([500, 500])
+
+
+def delete_items(object_list, fire_list):
+    delete_list = []
+    for index, i in enumerate(object_list):
+        if i.delete:
+            delete_list.append(index)
+    for i in delete_list:
+        object_list.pop(i)
+    delete_list = []
+    for index, i in enumerate(fire_list):
+        if i.delete:
+            delete_list.append(index)
+    for i in delete_list:
+        fire_list.pop(i)
 
 
 def load_images():

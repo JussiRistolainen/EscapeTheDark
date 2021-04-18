@@ -3,10 +3,11 @@ from fposition import Position
 
 
 class Item(Position):
-    def __init__(self, window, x, y, name, box):
+    def __init__(self, window, x, y, name, box, delete):
         super(Item, self).__init__(x, y, box)
         self.window = window
         self.name = name
+        self.delete = False
 
 
     def get_name(self):

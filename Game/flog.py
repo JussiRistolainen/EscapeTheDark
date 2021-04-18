@@ -4,8 +4,8 @@ from fitem import Item
 
 class Burn(Item):
 
-    def __init__(self, window, x, y, name, box, sprite):
-        super(Burn, self).__init__(window, x, y, name, box)
+    def __init__(self, window, x, y, name, box, sprite, delete):
+        super(Burn, self).__init__(window, x, y, name, box, delete)
         self.sprite = sprite
         self.time = 0
 

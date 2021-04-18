@@ -39,6 +39,6 @@ class Background:
         self.window.blit(s, (0, 0))
 
         for i in flame_list:
-            self.make_flame(self.window, i.time, i.size, i.get_position_x(), i.get_position_y())
+            self.make_flame(self.window, i.time, i.size, i.get_position_x()-8, i.get_position_y()-10)
 
 
