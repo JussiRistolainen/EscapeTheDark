@@ -15,9 +15,19 @@ class Flame(Item):
         return self.size*150-self.time
 
     def draw_sprite(self):
-        self.window.blit(self.sprite[0][int(self.time % 3)], (
-            self.get_position_x()-3 - self.sprite[1] // 2,
-            self.get_position_y()-8 - self.sprite[1] // 2))
+        if self.size >= 3:
+            self.window.blit(self.sprite[0][2][int(self.time % 3)], (
+                self.get_position_x()-3 - self.sprite[1] // 2,
+                self.get_position_y()-8 - self.sprite[1] // 2))
+        elif self.size == 2:
+            self.window.blit(self.sprite[0][1][int(self.time % 3)], (
+                self.get_position_x() - 3 - self.sprite[1] // 2,
+                self.get_position_y() - 8 - self.sprite[1] // 2))
+        elif self.size == 1:
+            self.window.blit(self.sprite[0][0][int(self.time % 3)], (
+                self.get_position_x() - 3 - self.sprite[1] // 2,
+                self.get_position_y() - 8 - self.sprite[1] // 2))
+
 
     def add_log(self):
         self.size += 1

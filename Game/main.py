@@ -4,6 +4,7 @@ from Game.fbackground import Background
 from fcharacter import Character
 from fdisplay import Display
 from fitem_controller import Item_control
+from ffireplace import Fireplace
 import Interaction_controller
 
 
@@ -65,7 +66,7 @@ def main():
                 mouse = 0
                 display.update_icon(pos)
             if event.type == CLOCKTICKFLAME:
-                update_game_overlay(time_count, background, display, object_list, fire_list, item_methods)
+                update_game_overlay(time_count, background, display, fire_list, item_methods)
                 delete_items(object_list, fire_list)
                 pygame.display.flip()
             if event.type == pygame.MOUSEBUTTONUP:
@@ -74,7 +75,7 @@ def main():
         Clock.tick(FPS)
 
 
-def update_game_overlay(time_count, background, display, object_list, fire_list, item_methods):
+def update_game_overlay(time_count, background, display, fire_list, item_methods):
     time_count.update_time()
     item_methods.update_flames_time()
     background.update(fire_list)
@@ -93,7 +94,7 @@ def game_start(window, object_list, images, item_methods):
     object_list.append(Character(window, 300, 300, 0, 0, [0, 0, 0, 0], "character", [lumberjack_key, images[1][0]], False))
 
     item_methods.create_log(1)
-    item_methods.create_fire([500, 500])
+    item_methods.create_fire_place([500, 500])
 
 
 def delete_items(object_list, fire_list):
@@ -113,11 +114,14 @@ def delete_items(object_list, fire_list):
 
 def load_images():
     image_list = ['Lumberjack', 'spritelog', 'logburn', 'log_index', 'matchbox',
-                  'log_icon', 'log_icon_checked', 'matchbox_icon', 'matchbox_icon_checked']
+                  'log_icon', 'log_icon_checked', 'matchbox_icon', 'matchbox_icon_checked', 'sprite_',
+                  'sprite22_', 'sprite2_', 'fireplace']
     index_list = [2, 1, 3, 1, 1,
-                  1, 1, 1, 1]
+                  1, 1, 1, 1, 13,
+                  4, 4, 6]
     image_size = [200, 100, 120, 60, 60,
-                  40, 40, 40, 40]
+                  40, 40, 40, 40, 120,
+                  120, 120, 120]
     IMAGES = {}
     for index, p in enumerate(image_list):
         for i in range(0, index_list[index]):
