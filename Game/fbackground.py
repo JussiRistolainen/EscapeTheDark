@@ -21,8 +21,7 @@ class Background:
         position = (position_x, position_y)
         pygame.draw.circle(self.window, self.ground, position, radius)
 
-    def make_flame(self, window, time, size, pos_x, pos_y):
-        radius = size * 150 - time * 1.2
+    def make_flame(self, window, radius, pos_x, pos_y):
         position = [pos_x, pos_y]
         self.draw_circle_alpha(window, self.value, radius, position)
         self.draw_circle_alpha(window, self.value, radius / 1.5, position)
@@ -37,8 +36,8 @@ class Background:
         self.window.blit(s, (0, 0))
         for i in object_list:
             if i.name == "bondfire":
-                self.make_flame(self.window, i.time, i.size, i.get_position_x()-8, i.get_position_y()-10)
+                self.make_flame(self.window, i.get_radius(), i.get_position_x()-8, i.get_position_y()-10)
             if i.name == "FirePlace":
-                self.make_flame(self.window, i.time, i.size, i.get_position_x(), i.get_position_y())
+                self.make_flame(self.window, i.get_radius(), i.get_position_x()-2, i.get_position_y()-10)
 
 

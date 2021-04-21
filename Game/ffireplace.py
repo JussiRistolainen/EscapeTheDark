@@ -10,31 +10,33 @@ class Fireplace(Item):
         self.sprite = sprite
 
     def get_radius(self):
-        return self.size*150-self.time
+        return self.size*40-self.time
 
     def draw_sprite(self):
         if self.size >= 6:
             self.window.blit(self.sprite[0][5], (
                 self.get_position_x() - 3 - self.sprite[1] // 2,
-                self.get_position_y() - 8 - self.sprite[1] // 2))
+                self.get_position_y() - 25 - self.sprite[1] // 2))
         elif self.size >= 3:
             self.window.blit(self.sprite[0][4], (
                 self.get_position_x()-3 - self.sprite[1] // 2,
-                self.get_position_y()-8 - self.sprite[1] // 2))
-            #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.get_position_x()-30, self.get_position_y()-60, 60, 80))
+                self.get_position_y()-25 - self.sprite[1] // 2))
+            #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.get_position_x()-30, self.get_position_y()-80, 60, 80))
+
+
 
         elif self.size == 2:
             self.window.blit(self.sprite[0][3], (
                 self.get_position_x() - 3 - self.sprite[1] // 2,
-                self.get_position_y() - 8 - self.sprite[1] // 2))
+                self.get_position_y() - 25 - self.sprite[1] // 2))
         elif self.size == 1:
             self.window.blit(self.sprite[0][2], (
                 self.get_position_x() - 3 - self.sprite[1] // 2,
-                self.get_position_y() - 8 - self.sprite[1] // 2))
+                self.get_position_y() - 25 - self.sprite[1] // 2))
         elif self.size == 0:
             self.window.blit(self.sprite[0][0], (
                 self.get_position_x() - 3 - self.sprite[1] // 2,
-                self.get_position_y() - 8 - self.sprite[1] // 2))
+                self.get_position_y() - 25 - self.sprite[1] // 2))
 
 
     def add_log(self):

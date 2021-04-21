@@ -23,7 +23,7 @@ class Item_control:
         self.fire_place = [self.images[0].get(key) for key in ['fireplace0', 'fireplace1', 'fireplace2', 'fireplace3', 'fireplace4', 'fireplace5']]
 
     def create_fire_place(self, pos):
-        obj = Fireplace(self.window, pos[0], pos[1], "FirePlace", [pos[0]-30, pos[1]-60, pos[0]+30, pos[1]+20], [self.fire_place, self.images[1][12]], 3, 0, False)
+        obj = Fireplace(self.window, pos[0], pos[1], "FirePlace", [pos[0]-30, pos[1]-80, pos[0]+30, pos[1]], [self.fire_place, self.images[1][12]], 3, 0, False)
         self.object_list.append(obj)
         self.fire_list.append(obj)
 

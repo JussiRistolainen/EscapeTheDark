@@ -91,10 +91,10 @@ def update_character_speed(character, x, y):
 
 def game_start(window, object_list, images, item_methods):
     lumberjack_key = [images[0].get(key) for key in ['Lumberjack0', 'Lumberjack1']]
-    object_list.append(Character(window, 300, 300, 0, 0, [0, 0, 0, 0], "character", [lumberjack_key, images[1][0]], False))
+    object_list.append(Character(window, 500, 400, 0, 0, [0, 0, 0, 0], "character", [lumberjack_key, images[1][0]], False))
 
     item_methods.create_log(1)
-    item_methods.create_fire_place([500, 500])
+    item_methods.create_fire_place([550, 360])
 
 
 def delete_items(object_list, fire_list):
