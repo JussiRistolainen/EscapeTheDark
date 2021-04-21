@@ -22,19 +22,32 @@ def main():
     object_list = []
     fire_list = []
 
+
+
     images = load_images()
+
+    # Character
+    lumberjack_key = [images[0].get(key) for key in ['Lumberjack0', 'Lumberjack1']]
+    lumberjack_key2 = [images[0].get(key) for key in ['Lumberjack_fire0', 'Lumberjack_fire1', 'Lumberjack_fire2']]
+    character_main = Character(window, 500, 400, 0, 0, [0, 0, 0, 0], "character", [[lumberjack_key, lumberjack_key2], images[1][0]], False, None)
+    object_list.append(character_main)
+
+
     #Single_objects
     time_count = Timecount(window, res_w, res_h, 0, 0, 0, 1)
-    item_methods = Item_control(window, object_list, fire_list, icon, res_w, res_h, images)
+    item_methods = Item_control(window, object_list, fire_list, icon, res_w, res_h, images, character_main)
     background = Background(window)
     display = Display(window, 0, images)
+
+
+
 
     #GameClock
     Clock = pygame.time.Clock()
     CLOCKTICKFLAME = pygame.USEREVENT + 1
     pygame.time.set_timer(CLOCKTICKFLAME, 100)
 
-    game_start(window, object_list, images, item_methods)
+    game_start(item_methods)
     mouse = 0
 
     while running:
@@ -66,7 +79,7 @@ def main():
                 mouse = 0
                 display.update_icon(pos)
             if event.type == CLOCKTICKFLAME:
-                update_game_overlay(time_count, background, display, fire_list, item_methods)
+                update_game_overlay(time_count, background, display, fire_list, item_methods, character_main)
                 delete_items(object_list, fire_list)
                 pygame.display.flip()
             if event.type == pygame.MOUSEBUTTONUP:
@@ -75,9 +88,10 @@ def main():
         Clock.tick(FPS)
 
 
-def update_game_overlay(time_count, background, display, fire_list, item_methods):
+def update_game_overlay(time_count, background, display, fire_list, item_methods, character):
     time_count.update_time()
     item_methods.update_flames_time()
+    character.check_item()
     background.update(fire_list)
     time_count.update_overlay()
     display.update(item_methods.seen_items())
@@ -85,13 +99,12 @@ def update_game_overlay(time_count, background, display, fire_list, item_methods
     pygame.display.flip()
 
 
+
 def update_character_speed(character, x, y):
     character.update_character_pos(character.speed(x, y))
 
 
-def game_start(window, object_list, images, item_methods):
-    lumberjack_key = [images[0].get(key) for key in ['Lumberjack0', 'Lumberjack1']]
-    object_list.append(Character(window, 500, 400, 0, 0, [0, 0, 0, 0], "character", [lumberjack_key, images[1][0]], False))
+def game_start(item_methods):
 
     item_methods.create_log(1)
     item_methods.create_fire_place([550, 360])
@@ -115,13 +128,16 @@ def delete_items(object_list, fire_list):
 def load_images():
     image_list = ['Lumberjack', 'spritelog', 'logburn', 'log_index', 'matchbox',
                   'log_icon', 'log_icon_checked', 'matchbox_icon', 'matchbox_icon_checked', 'sprite_',
-                  'sprite22_', 'sprite2_', 'fireplace']
+                  'sprite22_', 'sprite2_', 'fireplace', 'torch', 'torch_checked',
+                  'Lumberjack_fire']
     index_list = [2, 1, 3, 1, 1,
                   1, 1, 1, 1, 13,
-                  4, 4, 6]
+                  4, 4, 6, 1, 1,
+                  3]
     image_size = [200, 100, 120, 60, 60,
                   40, 40, 40, 40, 120,
-                  120, 120, 120]
+                  120, 120, 120, 40, 40,
+                  160]
     IMAGES = {}
     for index, p in enumerate(image_list):
         for i in range(0, index_list[index]):

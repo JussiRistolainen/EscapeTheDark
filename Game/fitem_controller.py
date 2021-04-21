@@ -2,10 +2,11 @@ import numpy as np
 from flog import Burn
 from fflame import Flame
 from ffireplace import Fireplace
+from ftorch import Torch
 
 class Item_control:
 
-    def __init__(self, window, object_list, fire_list, icon, res_w, res_h, images):
+    def __init__(self, window, object_list, fire_list, icon, res_w, res_h, images, character):
         self.window = window
         self.object_list = object_list
         self.fire_list = fire_list
@@ -13,6 +14,7 @@ class Item_control:
         self.res_w = res_w
         self.res_h = res_h
         self.images = images
+        self.character = character
 
         self.fire_key1 = [self.images[0].get(key) for key in ['logburn0', 'logburn1', 'logburn2']]
         self.fire_key2 = [self.images[0].get(key) for key in ['sprite22_0', 'sprite22_1', 'sprite22_2', 'sprite22_3']]
@@ -49,6 +51,13 @@ class Item_control:
                 picked = False
         if picked:
             self.object_list.append(Burn(self.window, pos[0], pos[1], "Log", [pos[0] - 40, pos[1] - 18, pos[0] + 45, pos[1] + 12], [self.images[0]['spritelog0'], self.images[1][2]], False))
+
+    def create_torch(self):
+        obj = Torch(self.window, self.character.get_position_x(), self.character.get_position_y(), "torch", [0, 0, 0, 0], [], 1, 0, False)
+        self.object_list.append(obj)
+        self.fire_list.append(obj)
+        self.character.set_item(obj)
+
 
     def check_for_log(self, pos):
         picked = True

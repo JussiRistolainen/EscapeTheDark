@@ -39,5 +39,7 @@ class Background:
                 self.make_flame(self.window, i.get_radius(), i.get_position_x()-8, i.get_position_y()-10)
             if i.name == "FirePlace":
                 self.make_flame(self.window, i.get_radius(), i.get_position_x()-2, i.get_position_y()-10)
-
+            if i.name == "torch":
+                print(i.get_radius)
+                self.make_flame(self.window, i.get_radius(), i.get_position_x() - 2, i.get_position_y() - 10)
 
