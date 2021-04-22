@@ -29,7 +29,7 @@ def main():
     # Character
     lumberjack_key = [images[0].get(key) for key in ['Lumberjack0', 'Lumberjack1']]
     lumberjack_key2 = [images[0].get(key) for key in ['Lumberjack_fire0', 'Lumberjack_fire1', 'Lumberjack_fire2']]
-    character_main = Character(window, 500, 400, 0, 0, [0, 0, 0, 0], "character", [[lumberjack_key, lumberjack_key2], images[1][0]], False, None)
+    character_main = Character(window, 500, 400, 0, 0, [0, 0, 0, 0], "character", [[lumberjack_key, lumberjack_key2], images[1][0]], False, None, False)
     object_list.append(character_main)
 
 

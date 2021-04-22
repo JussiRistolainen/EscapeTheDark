@@ -4,8 +4,8 @@ from fitem import Item
 
 class Character(Item):
 
-        def __init__(self, window, x, y, x_speed, y_speed, box, name, sprite, delete, item):
-            super(Character, self).__init__(window, x, y, name, box, delete)
+        def __init__(self, window, x, y, x_speed, y_speed, box, name, sprite, delete, item, liftable):
+            super(Character, self).__init__(window, x, y, name, box, delete, liftable)
             self.x_speed = x_speed
             self.y_speed = y_speed
             self.sprite = sprite

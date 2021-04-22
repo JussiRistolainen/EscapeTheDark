@@ -4,8 +4,8 @@ from fitem import Item
 
 class Torch(Item):
 
-    def __init__(self, window, x, y, name, box, sprite, size, time, delete):
-        super(Torch, self).__init__(window, x, y, name, box, delete)
+    def __init__(self, window, x, y, name, box, sprite, size, time, delete, liftable):
+        super(Torch, self).__init__(window, x, y, name, box, delete, liftable)
         self.size = size
         self.time = time
         self.sprite = sprite

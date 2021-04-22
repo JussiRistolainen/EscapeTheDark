@@ -25,7 +25,7 @@ class Item_control:
         self.fire_place = [self.images[0].get(key) for key in ['fireplace0', 'fireplace1', 'fireplace2', 'fireplace3', 'fireplace4', 'fireplace5']]
 
     def create_fire_place(self, pos):
-        obj = Fireplace(self.window, pos[0], pos[1], "FirePlace", [pos[0]-30, pos[1]-80, pos[0]+30, pos[1]], [self.fire_place, self.images[1][12]], 3, 0, False)
+        obj = Fireplace(self.window, pos[0], pos[1], "FirePlace", [pos[0]-30, pos[1]-80, pos[0]+30, pos[1]], [self.fire_place, self.images[1][12]], 3, 0, False, False)
         self.object_list.append(obj)
         self.fire_list.append(obj)
 
@@ -34,10 +34,10 @@ class Item_control:
         for i in range(number):
             random_x = np.random.randint(self.res_w - 200) + 100
             random_y = np.random.randint(self.res_h - 200) + 100
-            self.object_list.append(Burn(self.window, random_x, random_y, "Log", [random_x - 40, random_y - 18, random_x + 45, random_y + 12], [self.log_key, self.images[1][2]], False))
+            self.object_list.append(Burn(self.window, random_x, random_y, "Log", [random_x - 40, random_y - 18, random_x + 45, random_y + 12], [self.log_key, self.images[1][2]], False, True))
 
     def create_fire(self, pos):
-        obj = Flame(self.window, pos[0], pos[1], "bondfire", [pos[0] - 38, pos[1] - 25, pos[0] + 27, pos[1]], [[self.fire_key1, self.fire_key2, self.fire_key3, self.fire_key4], self.images[1][2]], 3, 0, False)
+        obj = Flame(self.window, pos[0], pos[1], "bondfire", [pos[0] - 38, pos[1] - 25, pos[0] + 27, pos[1]], [[self.fire_key1, self.fire_key2, self.fire_key3, self.fire_key4], self.images[1][2]], 3, 0, False, False)
         self.object_list.append(obj)
         self.fire_list.append(obj)
 
@@ -50,10 +50,10 @@ class Item_control:
                 i.add_log()
                 picked = False
         if picked:
-            self.object_list.append(Burn(self.window, pos[0], pos[1], "Log", [pos[0] - 40, pos[1] - 18, pos[0] + 45, pos[1] + 12], [self.images[0]['spritelog0'], self.images[1][2]], False))
+            self.object_list.append(Burn(self.window, pos[0], pos[1], "Log", [pos[0] - 40, pos[1] - 18, pos[0] + 45, pos[1] + 12], [self.images[0]['spritelog0'], self.images[1][2]], False, True))
 
     def create_torch(self):
-        obj = Torch(self.window, self.character.get_position_x(), self.character.get_position_y(), "torch", [0, 0, 0, 0], [], 1, 0, False)
+        obj = Torch(self.window, self.character.get_position_x(), self.character.get_position_y(), "torch", [0, 0, 0, 0], [], 1, 0, False, False)
         self.object_list.append(obj)
         self.fire_list.append(obj)
         self.character.set_item(obj)
@@ -66,7 +66,7 @@ class Item_control:
                 if (i.box[0] < pos[0] < i.box[2]) and (i.box[1] < pos[1] < i.box[3]):
                     if i.name == "Log":
                         self.object_list.pop(index)
-                        obj = Flame(self.window, pos[0], pos[1], "bondfire", [pos[0] - 38, pos[1] - 22, pos[0] + 27, pos[1]], [[self.fire_key1, self.fire_key2, self.fire_key3, self.fire_key4], 120], 1, 0, False)
+                        obj = Flame(self.window, pos[0], pos[1], "bondfire", [pos[0] - 38, pos[1] - 22, pos[0] + 27, pos[1]], [[self.fire_key1, self.fire_key2, self.fire_key3, self.fire_key4], 120], 1, 0, False, False)
                         self.object_list.append(obj)
                         self.fire_list.append(obj)
                         picked = False
@@ -84,7 +84,7 @@ class Item_control:
         lifted = True
         for index, i in enumerate(self.object_list):
             if lifted:
-                if i.is_clicked(pos) and (i.name != "bondfire" or i.name != "FirePlace"):
+                if i.is_clicked(pos) and i.is_liftable():
                     del_item = index
                     time_count.add_item(i.name)
                     lifted = False

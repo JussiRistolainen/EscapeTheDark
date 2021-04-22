@@ -3,8 +3,8 @@ import pygame
 
 class Fireplace(Item):
 
-    def __init__(self, window, x, y, name, box, sprite, size, time, delete):
-        super(Fireplace, self).__init__(window, x, y, name, box, delete)
+    def __init__(self, window, x, y, name, box, sprite, size, time, delete, liftable):
+        super(Fireplace, self).__init__(window, x, y, name, box, delete, liftable)
         self.size = size
         self.time = time
         self.sprite = sprite
