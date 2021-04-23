@@ -1,5 +1,4 @@
-import pygame
-from fitem import Item
+from Game.Items.fitem import Item
 
 
 class Character(Item):

@@ -1,10 +1,9 @@
 import pygame
 from ftime import Timecount
 from Game.fbackground import Background
-from fcharacter import Character
+from Game.Items.fcharacter import Character
 from fdisplay import Display
 from fitem_controller import Item_control
-from ffireplace import Fireplace
 import Interaction_controller
 
 

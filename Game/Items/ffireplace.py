@@ -1,5 +1,5 @@
-from fitem import Item
-import pygame
+from Game.Items.fitem import Item
+
 
 class Fireplace(Item):
 

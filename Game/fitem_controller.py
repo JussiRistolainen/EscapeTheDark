@@ -1,9 +1,9 @@
 import numpy as np
-from flog import Burn
-from fflame import Flame
-from ffireplace import Fireplace
-from ftorch import Torch
-from fmatchbox import Match
+from Game.Items.flog import Burn
+from Game.Items.fflame import Flame
+from Game.Items.ffireplace import Fireplace
+from Game.Items.ftorch import Torch
+from Game.Items.fmatchbox import Match
 
 class Item_control:
 

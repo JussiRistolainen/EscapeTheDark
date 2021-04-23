@@ -1,5 +1,4 @@
-import pygame
-from fposition import Position
+from Game.Items.fposition import Position
 
 
 class Item(Position):
