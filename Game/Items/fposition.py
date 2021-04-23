@@ -30,3 +30,6 @@ class Position(object):
 
     def set_y(self, new_y):
         self.y = new_y
+
+    def set_box(self, new_box):
+        self.box = new_box

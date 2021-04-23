@@ -4,6 +4,7 @@ from Game.Items.fflame import Flame
 from Game.Items.ffireplace import Fireplace
 from Game.Items.ftorch import Torch
 from Game.Items.fmatchbox import Match
+from Game.Items.flantern import Lantern
 
 class Item_control:
 
@@ -25,6 +26,7 @@ class Item_control:
         self.log_key = self.images[0].get('spritelog0')
         self.fire_place = [self.images[0].get(key) for key in ['fireplace0', 'fireplace1', 'fireplace2', 'fireplace3', 'fireplace4', 'fireplace5']]
         self.matchbox_key = self.images[0].get('matchbox0')
+        self.lantern_key = [self.images[0].get(key) for key in ['Lantern_burn0', 'Lantern_burn1', 'Lantern_burn2']]
 
 
     def create_fire_place(self, pos):
@@ -67,6 +69,10 @@ class Item_control:
             random_y = np.random.randint(self.res_h - 200) + 100
             self.object_list.append(Match(self.window, random_x, random_y, "Matchbox", [random_x-20, random_y-14, random_x+5, random_y+6], [self.matchbox_key, self.images[1][2]], False, True))
 
+    def create_lantern(self, pos):
+        obj = Lantern(self.window, pos[0], pos[1], "Lantern", [pos[0]-10, pos[1]-40, pos[0]+10, pos[1]+10], [self.lantern_key, self.images[1][17]], 3, 0, False, True)
+        self.object_list.append(obj)
+        self.fire_list.append(obj)
 
     def check_for_log(self, pos):
         picked = True
@@ -88,6 +94,31 @@ class Item_control:
                     seen_items.append(p)
         return seen_items
 
+    def lift_lantern(self, pos):
+        lifted = True
+        lifted2 = True
+        del_item = -1
+        for index, i in enumerate(self.fire_list):
+            if lifted2:
+                if i.is_clicked(pos) and i.is_liftable():
+                    lifted2 = False
+                    self.character.set_item(i)
+        for index, i in enumerate(self.object_list):
+            if i.name == "Lantern" and lifted:
+                if i.is_clicked(pos) and i.is_liftable():
+                    lifted = False
+                    del_item = index
+        if del_item != -1:
+            self.object_list.pop(del_item)
+
+    def place_lantern(self, pos, item):
+        obj = item
+        obj.set_x(pos[0])
+        obj.set_y(pos[1])
+        obj.set_box([pos[0]-10, pos[1]-40, pos[0]+10, pos[1]+10])
+        self.object_list.append(item)
+        self.character.set_item(None)
+
     def lift_item(self, time_count, pos):
         del_item = -1
         lifted = True
@@ -97,6 +128,7 @@ class Item_control:
                     del_item = index
                     time_count.add_item(i.name)
                     lifted = False
+
         if del_item != -1:
             self.object_list.pop(del_item)
 

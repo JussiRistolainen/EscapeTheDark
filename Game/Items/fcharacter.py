@@ -15,7 +15,7 @@ class Character(Item):
             self.x += change[0]
             self.y += change[1]
             if self.item is not None:
-                if self.item.name == "torch":
+                if self.item.name == "torch" or self.item.name == "Lantern":
                     self.item.set_x(self.x)
                     self.item.set_y(self.y)
 
@@ -37,13 +37,17 @@ class Character(Item):
 
         def draw_sprite(self):
             self.time += 0.1
-            if self.item is None:
+            if not self.item:
                 self.window.blit(self.sprite[0][0][int(self.time % 2)], (
                     self.get_position_x() - self.sprite[1] // 2,
                     self.get_position_y()-10 - self.sprite[1] // 1.6))
             elif self.item.name == "torch":
                 self.window.blit(self.sprite[0][1][int(self.time % 3)], (
                     self.get_position_x()+15 - self.sprite[1] // 2,
+                    self.get_position_y() - 5 - self.sprite[1] // 1.6))
+            elif self.item.name == "Lantern":
+                self.window.blit(self.sprite[0][1][int(self.time % 3)], (
+                    self.get_position_x() + 15 - self.sprite[1] // 2,
                     self.get_position_y() - 5 - self.sprite[1] // 1.6))
                 #pygame.draw.rect(self.window, (255, 255, 255), pygame.Rect(self.get_position_x(), self.get_position_y(), 1, 1))
 
@@ -54,7 +58,15 @@ class Character(Item):
             self.item = item
 
         def check_item(self):
-            if self.item != None:
-                 if self.item.size == 0:
+            if self.item:
+                if self.item.size == 0 and self.item.name != "Lantern":
                     self.item = None
+
+        def return_item_name(self):
+            if self.item:
+                return self.item.name
+
+        def get_item(self):
+            if self.item:
+                return self.item
 

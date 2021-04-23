@@ -8,12 +8,12 @@ class Background:
         self.Darkness = (115, 118, 83)
         self.ground = (20, 20, 0)
         self.alpha_value = 200
-        self.value = 100
 
-    def draw_circle_alpha(self, surface, value, radius, position):
+
+    def draw_circle_alpha(self, surface, color, radius, position):
         target_rect = pygame.Rect(position, (0, 0)).inflate((radius * 2, radius * 2))
         shape_surf = pygame.Surface(target_rect.size, pygame.SRCALPHA)
-        pygame.draw.circle(shape_surf, (value, 0, 0, 50), (radius, radius), radius)
+        pygame.draw.circle(shape_surf, color, (radius, radius), radius)
         surface.blit(shape_surf, target_rect)
 
     def make_flame_background(self, time, size, position_x, position_y):
@@ -21,11 +21,11 @@ class Background:
         position = (position_x, position_y)
         pygame.draw.circle(self.window, self.ground, position, radius)
 
-    def make_flame(self, window, radius, pos_x, pos_y):
+    def make_flame(self, window, radius, pos_x, pos_y, color):
         position = [pos_x, pos_y]
-        self.draw_circle_alpha(window, self.value, radius, position)
-        self.draw_circle_alpha(window, self.value, radius / 1.5, position)
-        self.draw_circle_alpha(window, self.value, radius / 3, position)
+        self.draw_circle_alpha(window, color, radius, position)
+        self.draw_circle_alpha(window, color, radius / 1.5, position)
+        self.draw_circle_alpha(window, color, radius / 3, position)
 
     def update(self, object_list):
         # Fill background
@@ -36,10 +36,12 @@ class Background:
         self.window.blit(s, (0, 0))
         for i in object_list:
             if i.name == "bondfire":
-                self.make_flame(self.window, i.get_radius(), i.get_position_x()-8, i.get_position_y()-10)
+                self.make_flame(self.window, i.get_radius(), i.get_position_x()-8, i.get_position_y()-10, [100, 0, 0, 50])
             if i.name == "FirePlace":
-                self.make_flame(self.window, i.get_radius(), i.get_position_x()-2, i.get_position_y()-10)
+                self.make_flame(self.window, i.get_radius(), i.get_position_x()-2, i.get_position_y()-10, [100, 0, 0, 50])
             if i.name == "torch":
                 print(i.get_radius)
-                self.make_flame(self.window, i.get_radius(), i.get_position_x() - 2, i.get_position_y() - 10)
+                self.make_flame(self.window, i.get_radius(), i.get_position_x() - 2, i.get_position_y() - 10, [100, 0, 0, 50])
+            if i.name == "Lantern":
+                self.make_flame(self.window, i.get_radius(), i.get_position_x() - 2, i.get_position_y() - 10, [100, 100, 100, 10])
 

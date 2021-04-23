@@ -74,7 +74,7 @@ def main():
             pos = pygame.mouse.get_pos()
             click = pygame.mouse.get_pressed()
             if click[0] == 1 and mouse:
-                Interaction_controller.clicked(display.get_icon(), time_count, item_methods, pos)
+                Interaction_controller.clicked(display.get_icon(), time_count, item_methods, pos, character_main)
                 mouse = 0
                 display.update_icon(pos)
             if event.type == CLOCKTICKFLAME:
@@ -107,7 +107,8 @@ def game_start(item_methods):
 
     item_methods.create_log(1)
     item_methods.create_fire_place([550, 360])
-    item_methods.create_matchbox(10)
+    item_methods.create_matchbox(1)
+    item_methods.create_lantern([400, 360])
 
 
 
@@ -130,15 +131,15 @@ def load_images():
     image_list = ['Lumberjack', 'spritelog', 'logburn', 'log_index', 'matchbox_count',
                   'log_icon', 'log_icon_checked', 'matchbox_icon', 'matchbox_icon_checked', 'sprite_',
                   'sprite22_', 'sprite2_', 'fireplace', 'torch', 'torch_checked',
-                  'Lumberjack_fire', 'matchbox']
+                  'Lumberjack_fire', 'matchbox', 'Lantern_burn']
     index_list = [2, 1, 3, 1, 1,
                   1, 1, 1, 1, 13,
                   4, 4, 6, 1, 1,
-                  3, 1]
+                  3, 1, 3]
     image_size = [200, 100, 120, 60, 60,
                   40, 40, 40, 40, 120,
                   120, 120, 120, 40, 40,
-                  160, 40]
+                  160, 40, 80]
     IMAGES = {}
     for index, p in enumerate(image_list):
         for i in range(0, index_list[index]):
