@@ -3,6 +3,7 @@ from flog import Burn
 from fflame import Flame
 from ffireplace import Fireplace
 from ftorch import Torch
+from fmatchbox import Match
 
 class Item_control:
 
@@ -23,6 +24,8 @@ class Item_control:
         self.fire_key3 = [self.images[0].get(key) for key in ['sprite2_0', 'sprite2_1', 'sprite2_2', 'sprite2_3']]
         self.log_key = self.images[0].get('spritelog0')
         self.fire_place = [self.images[0].get(key) for key in ['fireplace0', 'fireplace1', 'fireplace2', 'fireplace3', 'fireplace4', 'fireplace5']]
+        self.matchbox_key = self.images[0].get('matchbox0')
+
 
     def create_fire_place(self, pos):
         obj = Fireplace(self.window, pos[0], pos[1], "FirePlace", [pos[0]-30, pos[1]-80, pos[0]+30, pos[1]], [self.fire_place, self.images[1][12]], 3, 0, False, False)
@@ -57,6 +60,12 @@ class Item_control:
         self.object_list.append(obj)
         self.fire_list.append(obj)
         self.character.set_item(obj)
+
+    def create_matchbox(self, number):
+        for i in range(number):
+            random_x = np.random.randint(self.res_w - 200) + 100
+            random_y = np.random.randint(self.res_h - 200) + 100
+            self.object_list.append(Match(self.window, random_x, random_y, "Matchbox", [random_x-20, random_y-14, random_x+5, random_y+6], [self.matchbox_key, self.images[1][2]], False, True))
 
 
     def check_for_log(self, pos):

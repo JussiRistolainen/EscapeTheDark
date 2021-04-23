@@ -108,6 +108,8 @@ def game_start(item_methods):
 
     item_methods.create_log(1)
     item_methods.create_fire_place([550, 360])
+    item_methods.create_matchbox(10)
+
 
 
 def delete_items(object_list, fire_list):
@@ -126,18 +128,18 @@ def delete_items(object_list, fire_list):
 
 
 def load_images():
-    image_list = ['Lumberjack', 'spritelog', 'logburn', 'log_index', 'matchbox',
+    image_list = ['Lumberjack', 'spritelog', 'logburn', 'log_index', 'matchbox_count',
                   'log_icon', 'log_icon_checked', 'matchbox_icon', 'matchbox_icon_checked', 'sprite_',
                   'sprite22_', 'sprite2_', 'fireplace', 'torch', 'torch_checked',
-                  'Lumberjack_fire']
+                  'Lumberjack_fire', 'matchbox']
     index_list = [2, 1, 3, 1, 1,
                   1, 1, 1, 1, 13,
                   4, 4, 6, 1, 1,
-                  3]
+                  3, 1]
     image_size = [200, 100, 120, 60, 60,
                   40, 40, 40, 40, 120,
                   120, 120, 120, 40, 40,
-                  160]
+                  160, 40]
     IMAGES = {}
     for index, p in enumerate(image_list):
         for i in range(0, index_list[index]):

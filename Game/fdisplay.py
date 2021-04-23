@@ -32,7 +32,7 @@ class Display:
 
     def update_overlay(self):
         self.draw_sprite(100, 2, 2, 'log_index0', 165, 45)
-        self.draw_sprite(80, 2, 2, 'matchbox0', 220, 30)
+        self.draw_sprite(80, 2, 2, 'matchbox_count0', 220, 30)
         self.draw_sprite(40, 2, 2, 'log_icon0', 20, 300)
         self.draw_sprite(40, 2, 2, 'matchbox_icon0', 17, 320)
         self.draw_sprite(40, 2, 2, 'torch0', 17, 350)

@@ -96,7 +96,7 @@ class Timecount:
     def add_item(self, var):
         if var == "Log":
             self.logs += 1
-        elif var == "match":
+        elif var == "Matchbox":
             self.matches += 5
 
     def remove_item(self, var):
