@@ -10,8 +10,8 @@ class Lantern(Item):
         self.sprite = sprite
 
     def get_radius(self):
-        if self.size*30-self.time > 0:
-            return self.size * 30 - self.time
+        if self.size*50-self.time > 0:
+            return self.size * 50 - self.time
         else:
             return self.size*30-self.time
 
