@@ -96,18 +96,15 @@ class Item_control:
 
     def lift_lantern(self, pos):
         lifted = True
-        lifted2 = True
         del_item = -1
         for index, i in enumerate(self.fire_list):
-            if lifted2:
-                if i.is_clicked(pos) and i.is_liftable():
-                    lifted2 = False
-                    self.character.set_item(i)
-        for index, i in enumerate(self.object_list):
-            if i.name == "Lantern" and lifted:
+            if lifted:
                 if i.is_clicked(pos) and i.is_liftable():
                     lifted = False
-                    del_item = index
+                    self.character.set_item(i)
+        for index, i in enumerate(self.object_list):
+            if i == self.character.get_item():
+                del_item = index
         if del_item != -1:
             self.object_list.pop(del_item)
 
