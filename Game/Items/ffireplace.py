@@ -10,7 +10,10 @@ class Fireplace(Item):
         self.sprite = sprite
 
     def get_radius(self):
-        return self.size*40-self.time
+        if self.size*40-self.time > 0:
+            return self.size*40-self.time
+        else:
+            return 0
 
     def draw_sprite(self):
         if self.size >= 6:

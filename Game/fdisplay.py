@@ -24,6 +24,8 @@ class Display:
             self.icon = 2
         elif 4 < pos[0] < 35 and 331 < pos[1] < 370:
             self.icon = 3
+        elif 4 < pos[0] < 35 and 371 < pos[1] < 400:
+            self.icon = 4
         else:
             self.icon = 0
 
@@ -33,15 +35,19 @@ class Display:
     def update_overlay(self):
         self.draw_sprite(100, 2, 2, 'log_index0', 165, 45)
         self.draw_sprite(80, 2, 2, 'matchbox_count0', 220, 30)
+        self.draw_sprite(40, 2, 2, 'oil_icon0', 285, 20)
         self.draw_sprite(40, 2, 2, 'log_icon0', 20, 300)
         self.draw_sprite(40, 2, 2, 'matchbox_icon0', 17, 320)
         self.draw_sprite(40, 2, 2, 'torch0', 17, 350)
+        self.draw_sprite(40, 2, 2, 'oilcan0', 14, 385)
         if self.icon == 1:
             self.draw_sprite(40, 2, 2, 'log_icon_checked0', 20, 300)
         elif self.icon == 2:
             self.draw_sprite(40, 2, 2, 'matchbox_icon_checked0', 17, 320)
         elif self.icon == 3:
             self.draw_sprite(40, 2, 2, 'torch_checked0', 17, 350)
+        elif self.icon == 4:
+            self.draw_sprite(40, 2, 2, 'oilcan_checked0', 14, 385)
 
     def draw_sprite(self, object_size, x_div, y_div, sprite_name, pos_x, pos_y):
         self.window.blit(self.IMAGES[0][sprite_name], (pos_x - object_size // x_div, pos_y - object_size // y_div))

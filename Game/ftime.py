@@ -98,15 +98,22 @@ class Timecount:
             self.logs += 1
         elif var == "Matchbox":
             self.matches += 5
+        elif var == 'Oilcan':
+            self.lantern += 3
 
     def remove_item(self, var):
         if var == "Log":
             self.logs -= 1
         elif var == "match":
             self.matches -= 1
+        elif var == "Oilcan":
+            self.lantern -= 1
 
     def get_logs(self):
         return self.logs
 
     def get_matches(self):
         return self.matches
+
+    def get_oil(self):
+        return self.lantern

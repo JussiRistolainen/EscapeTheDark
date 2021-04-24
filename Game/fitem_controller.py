@@ -5,6 +5,7 @@ from Game.Items.ffireplace import Fireplace
 from Game.Items.ftorch import Torch
 from Game.Items.fmatchbox import Match
 from Game.Items.flantern import Lantern
+from Game.Items.foil import Oil
 
 class Item_control:
 
@@ -27,13 +28,12 @@ class Item_control:
         self.fire_place = [self.images[0].get(key) for key in ['fireplace0', 'fireplace1', 'fireplace2', 'fireplace3', 'fireplace4', 'fireplace5']]
         self.matchbox_key = self.images[0].get('matchbox0')
         self.lantern_key = [self.images[0].get(key) for key in ['Lantern_burn0', 'Lantern_burn1', 'Lantern_burn2']]
-
+        self.oil = self.images[0].get('oil0')
 
     def create_fire_place(self, pos):
         obj = Fireplace(self.window, pos[0], pos[1], "FirePlace", [pos[0]-30, pos[1]-80, pos[0]+30, pos[1]], [self.fire_place, self.images[1][12]], 3, 0, False, False)
         self.object_list.append(obj)
         self.fire_list.append(obj)
-
 
     def create_log(self, number):
         for i in range(number):
@@ -45,8 +45,6 @@ class Item_control:
         obj = Flame(self.window, pos[0], pos[1], "bondfire", [pos[0] - 38, pos[1] - 25, pos[0] + 27, pos[1]], [[self.fire_key1, self.fire_key2, self.fire_key3, self.fire_key4], self.images[1][2]], 3, 0, False, False)
         self.object_list.append(obj)
         self.fire_list.append(obj)
-
-
 
     def create_log_with_pos(self, pos):
         picked = True
@@ -69,6 +67,13 @@ class Item_control:
             random_y = np.random.randint(self.res_h - 200) + 100
             self.object_list.append(Match(self.window, random_x, random_y, "Matchbox", [random_x-20, random_y-14, random_x+5, random_y+6], [self.matchbox_key, self.images[1][2]], False, True))
 
+    def create_oilcan(self, number):
+        for i in range(number):
+            random_x = np.random.randint(self.res_w - 200) + 100
+            random_y = np.random.randint(self.res_h - 200) + 100
+            self.object_list.append(Oil(self.window, random_x, random_y, "Oilcan", [random_x-15, random_y-20, random_x-4, random_y+15], [self.oil, self.images[1][2]], False, True))
+
+
     def create_lantern(self, pos):
         obj = Lantern(self.window, pos[0], pos[1], "Lantern", [pos[0]-10, pos[1]-40, pos[0]+10, pos[1]+10], [self.lantern_key, self.images[1][17]], 3, 0, False, True)
         self.object_list.append(obj)
@@ -85,6 +90,8 @@ class Item_control:
                         self.object_list.append(obj)
                         self.fire_list.append(obj)
                         picked = False
+
+
 
     def seen_items(self):
         seen_items = []
@@ -115,6 +122,14 @@ class Item_control:
         obj.set_box([pos[0]-10, pos[1]-40, pos[0]+10, pos[1]+10])
         self.object_list.append(item)
         self.character.set_item(None)
+
+    def check_lantern(self, pos, time_count):
+        for i in self.fire_list:
+            if i.name == "Lantern":
+                if i.is_clicked(pos):
+                    i.add_oil()
+                    time_count.remove_item("Oilcan")
+
 
     def lift_item(self, time_count, pos):
         del_item = -1
