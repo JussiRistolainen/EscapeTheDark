@@ -10,9 +10,11 @@ def clicked(icon, time_count, item_methods, pos, character):
         elif icon == 2 and time_count.get_matches() > 0:
             item_methods.check_for_log(pos)
             time_count.remove_item("match")
-        elif icon == 3 and time_count.get_logs() > 0:
-            item_methods.create_torch()
         elif icon == 0:
             item_methods.lift_lantern(pos)
             item_methods.lift_item(time_count, pos)
+    if icon == 3 and time_count.get_logs() > 0:
+        item_methods.create_torch()
+        time_count.remove_item("match")
+        time_count.remove_item("Log")
 
